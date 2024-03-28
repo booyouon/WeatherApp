@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 
 app.use(function (req, res, next) {
   if (!req.headers.authorization) {
-    return res.status(403).json({ error: "No credentials sent!" });
+    return res.status(403).json({ status: 403, error: "No credentials sent!" });
   }
   next();
 });

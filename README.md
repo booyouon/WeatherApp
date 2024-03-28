@@ -143,3 +143,18 @@ npm test
 - [Axios](https://axios-http.com/) This is a promise-based HTTP client for JavaScript.
 - [body-parser](https://www.npmjs.com/package/body-parser) This is a Node.js middleware used to parse incoming request bodies.
 - [dotenv](https://www.npmjs.com/package/dotenv) This is a Node.js module that loads environment variables from a .env file into process.env.
+
+## Errors
+
+- Error Parameters:
+  - `status`: Indicates the occurrence of an error during the processing of the request.
+  - `error`: Represents the HTTP status code associated with the error response.
+
+Example of error response
+
+```json
+{
+  "status": 403,
+  "error": "No credentials sent!"
+}
+```
