@@ -41,7 +41,7 @@ Before running this application, you need to have the following installed on you
    - Create a .env file (Skip if not being done locally as only required for testing purposes)
    - Enter in the following into your .env file, replace "YOUR_API_KEY" with your API Key from OpenWeatherMap:
 
-   ```javascript
+   ```json
    API_KEY = "YOUR_API_KEY";
    ```
 
@@ -64,6 +64,12 @@ The server will start running on `http://localhost:3000` by default. Feel free t
   - `lon`: Longitude of the location (required)
 - Authorization:
   - Bearer + YOUR_API_KEY
+- Response Parameters:
+  - `weatherCondition`: Describes the current weather condition in the specified area, such as "clear sky", "rain", "snow", etc.
+  - `temperatureCategory`: Categorizes the current temperature in the specified area as either "Hot", "Cold", or "Moderate" based on predefined temperature thresholds.
+  - `alerts`: Contains information about any active weather alerts in the specified area, including the event type and a description of the alert.
+    - `event`: Describes the type of weather event triggering the alert, such as "Flood Warning", "Severe Thunderstorm Watch", etc.
+    - `description`: Provides additional details or instructions related to the weather alert, such as the affected area, expected impact, and recommended actions.
 
 Example usage:
 
@@ -75,6 +81,17 @@ curl --location --request GET 'http://localhost:3000/weather' \
     "lat": 33.44,
     "lon": -94.04
 }'
+```
+
+Example response:
+
+```json
+{
+  "status": 200,
+  "weatherCondition": "clear sky",
+  "temperatureCategory": "Moderate",
+  "alerts": "No active weather alerts."
+}
 ```
 
 ## Testing
