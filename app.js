@@ -18,36 +18,21 @@ app.get("/weather", async (req, res) => {
   const body = req.body;
   const token = req.headers.authorization.split(" ")[1];
   let error;
+  let status = 200;
 
   try {
     // Check for errors
     if (!body || Object.keys(body).length === 0) {
       error = "Content cannot be empty";
-    } else if (!token) {
-      error = "API key is missing. Please provide your OpenWeatherMap API key.";
-    } else if (!body.lat || !body.lon) {
-      error = "Latitude(lat) and longitude(lon) are required parameters.";
-    } else if (
-      typeof body.lat !== "number" ||
-      body.lat < -90 ||
-      body.lat > 90
-    ) {
-      error = "Invalid latitude. Must be a number between -90 and 90.";
-    } else if (
-      typeof body.lon !== "number" ||
-      body.lon < -180 ||
-      body.lon > 180
-    ) {
-      error = "Invalid longitude. Must be a number between -180 and 180.";
+      status = 400;
+      throw new Error(error);
     }
-
-    if (error) throw new Error(error);
 
     const result = await weather.getWeather(body.lat, body.lon, token);
 
-    res.json(result);
+    res.status(result.status).json(result);
   } catch (e) {
-    res.status(400).json({
+    res.status(status).json({
       error,
     });
   }

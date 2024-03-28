@@ -54,6 +54,29 @@ checkWeatherAlerts = (data) => {
  * @return {object}
  */
 getWeather = async (lat, lon, key, units = "imperial") => {
+  let responseData = {
+    status: 200,
+  };
+  // Check for errors
+  if (!key) {
+    responseData.error =
+      "API key is missing. Please provide your OpenWeatherMap API key.";
+  } else if (!lat || !lon) {
+    responseData.error =
+      "Latitude(lat) and longitude(lon) are required parameters.";
+  } else if (typeof lat !== "number" || lat < -90 || lat > 90) {
+    responseData.error =
+      "Invalid latitude. Must be a number between -90 and 90.";
+  } else if (typeof lon !== "number" || lon < -180 || lon > 180) {
+    responseData.error =
+      "Invalid longitude. Must be a number between -180 and 180.";
+  }
+
+  if (responseData.error) {
+    responseData.status = 400;
+    return responseData;
+  }
+
   const url = new URL(BASE_URL);
 
   url.searchParams.set("lat", lat);
@@ -61,19 +84,22 @@ getWeather = async (lat, lon, key, units = "imperial") => {
   url.searchParams.set("units", units);
   url.searchParams.set("appid", key);
 
-  const response = await axios.get(url);
-  const data = response.data;
+  try {
+    const response = await axios.get(url);
+    const data = response.data;
 
-  const weatherCondition = data.current.weather[0].description;
-  const currentTemp = data.current.temp;
-  const temperatureCategory = determineTemperatureCategory(currentTemp);
-  const alerts = checkWeatherAlerts(data);
-
-  const responseData = {
-    weatherCondition,
-    temperatureCategory,
-    alerts,
-  };
+    responseData.weatherCondition = data.current.weather[0].description;
+    const currentTemp = data.current.temp;
+    responseData.temperatureCategory =
+      determineTemperatureCategory(currentTemp);
+    responseData.alerts = checkWeatherAlerts(data);
+  } catch (e) {
+    if (e.response) {
+      const error = e.response;
+      responseData.status = error.status;
+      responseData.error = error.data.message;
+    }
+  }
 
   return responseData;
 };

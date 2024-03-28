@@ -10,6 +10,7 @@ describe("getWeather function", () => {
 
   test("should return weather data when API call is successful", async () => {
     const mockResponseData = {
+      status: 200,
       current: {
         weather: [{ description: "Clear" }],
         temp: 75,
@@ -22,6 +23,7 @@ describe("getWeather function", () => {
     const result = await getWeather(40.7128, -74.006, "00000");
 
     expect(result).toEqual({
+      status: 200,
       weatherCondition: "Clear",
       temperatureCategory: "Moderate",
       alerts: "No active weather alerts.",
@@ -30,6 +32,7 @@ describe("getWeather function", () => {
 
   test("should return weather data with alerts when alerts are present", async () => {
     const mockResponseData = {
+      status: 200,
       current: {
         weather: [{ description: "Rain" }],
         temp: 55,
@@ -47,6 +50,7 @@ describe("getWeather function", () => {
     const result = await getWeather(40.7128, -74.006, "00000");
 
     expect(result).toEqual({
+      status: 200,
       weatherCondition: "Rain",
       temperatureCategory: "Moderate",
       alerts: [
@@ -60,6 +64,7 @@ describe("getWeather function", () => {
 
   test("should return temperatureCategory as Hot if weather is greater than 86", async () => {
     const mockResponseData = {
+      status: 200,
       current: {
         weather: [{ description: "Sunny" }],
         temp: 100,
@@ -75,6 +80,7 @@ describe("getWeather function", () => {
 
   test("should return temperatureCategory as Cold if weather is less than 50", async () => {
     const mockResponseData = {
+      status: 200,
       current: {
         weather: [{ description: "Sunny" }],
         temp: 10,
@@ -90,6 +96,7 @@ describe("getWeather function", () => {
 
   test("should return temperatureCategory as Moderate if weather is between 86 and 50", async () => {
     const mockResponseData = {
+      status: 200,
       current: {
         weather: [{ description: "Sunny" }],
         temp: 70,

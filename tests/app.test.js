@@ -18,6 +18,18 @@ describe("GET /weather", () => {
     expect(response.body.error).toBe("No credentials sent!");
   });
 
+  test("should return 401 if invalid API Key sent", async () => {
+    const response = await request(app)
+      .get("/weather")
+      .set("Authorization", "Bearer " + "invalid_key")
+      .send({
+        lat: 33.44,
+        lon: 133.44,
+      });
+    expect(response.status).toBe(401);
+    expect(response.body).toHaveProperty("error");
+  });
+
   test("should return 400 if lon is missing", async () => {
     const response = await request(app)
       .get("/weather")
