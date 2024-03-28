@@ -6,9 +6,6 @@ const dotenv = require("dotenv").config({
   path: __dirname + "/../.env",
 });
 
-// OpenWeatherMap API key
-const API_KEY = process.env.API_KEY;
-
 // Define thresholds for hot and cold temperatures
 const HOT_THRESHOLD = process.env.HOT_THRESHOLD || 86; // 86 Fahrenheit
 const COLD_THRESHOLD = process.env.COLD_THRESHOLD || 50; // 50 Fahrenheit
@@ -52,16 +49,17 @@ checkWeatherAlerts = (data) => {
  * @name getWeather
  * @param {integer} lat
  * @param {integer} lon
+ * @param {string} key - API KEY from Open Weather
  * @param {string} units - standard, metric and imperial units are available
  * @return {object}
  */
-getWeather = async (lat, lon, units = "imperial") => {
+getWeather = async (lat, lon, key, units = "imperial") => {
   const url = new URL(BASE_URL);
 
   url.searchParams.set("lat", lat);
   url.searchParams.set("lon", lon);
   url.searchParams.set("units", units);
-  url.searchParams.set("appid", API_KEY);
+  url.searchParams.set("appid", key);
 
   const response = await axios.get(url);
   const data = response.data;

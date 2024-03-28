@@ -62,12 +62,15 @@ The server will start running on `http://localhost:3000` by default. Feel free t
 - Body Parameters:
   - `lat`: Latitude of the location (required)
   - `lon`: Longitude of the location (required)
+- Authorization:
+  - Bearer + YOUR_API_KEY
 
 Example usage:
 
 ```bash
 curl --location --request GET 'http://localhost:3000/weather' \
 --header 'Content-Type: application/json' \
+--header 'Authorization: Bearer YOUR_API_KEY' \
 --data '{
     "lat": 33.44,
     "lon": -94.04

@@ -19,7 +19,7 @@ describe("getWeather function", () => {
 
     axios.get.mockResolvedValue({ data: mockResponseData });
 
-    const result = await getWeather(40.7128, -74.006);
+    const result = await getWeather(40.7128, -74.006, "00000");
 
     expect(result).toEqual({
       weatherCondition: "Clear",
@@ -44,7 +44,7 @@ describe("getWeather function", () => {
 
     axios.get.mockResolvedValue({ data: mockResponseData });
 
-    const result = await getWeather(40.7128, -74.006);
+    const result = await getWeather(40.7128, -74.006, "00000");
 
     expect(result).toEqual({
       weatherCondition: "Rain",
@@ -69,7 +69,7 @@ describe("getWeather function", () => {
 
     axios.get.mockResolvedValue({ data: mockResponseData });
 
-    const result = await getWeather(40.7128, -74.006);
+    const result = await getWeather(40.7128, -74.006, "00000");
     expect(result.temperatureCategory).toEqual("Hot");
   });
 
@@ -84,7 +84,7 @@ describe("getWeather function", () => {
 
     axios.get.mockResolvedValue({ data: mockResponseData });
 
-    const result = await getWeather(40.7128, -74.006);
+    const result = await getWeather(40.7128, -74.006, "00000");
     expect(result.temperatureCategory).toEqual("Cold");
   });
 
@@ -99,7 +99,7 @@ describe("getWeather function", () => {
 
     axios.get.mockResolvedValue({ data: mockResponseData });
 
-    const result = await getWeather(40.7128, -74.006);
+    const result = await getWeather(40.7128, -74.006, "00000");
     expect(result.temperatureCategory).toEqual("Moderate");
   });
 });
