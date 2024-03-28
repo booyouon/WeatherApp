@@ -38,7 +38,7 @@ Before running this application, you need to have the following installed on you
 4. Set up your OpenWeatherMap API key:
 
    - Obtain an API key from OpenWeatherMap (https://openweathermap.org/api).
-   - Create a .env file (Skip if not being done locally)
+   - Create a .env file (Skip if not being done locally as only required for testing purposes)
    - Enter in the following into your .env file, replace "YOUR_API_KEY" with your API Key from OpenWeatherMap:
 
    ```javascript
