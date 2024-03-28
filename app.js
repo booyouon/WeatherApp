@@ -5,7 +5,6 @@ const dotenv = require("dotenv").config({
 });
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 const weather = require("./controllers/weather");
 
 // parse application/json
@@ -50,9 +49,4 @@ app.get("/weather", async (req, res) => {
   }
 });
 
-const server = app.listen(PORT, (err) => {
-  if (err) return console.error(err);
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
-
-module.exports = server;
+module.exports = app;

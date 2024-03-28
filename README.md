@@ -94,6 +94,7 @@ npm test
 ├── .env
 ├── .gitignore
 ├── app.js
+├── server.js
 ├── package-lock.json
 ├── package.json
 └── README.md
@@ -106,6 +107,7 @@ npm test
 - `.env`: Contains the Environment Variables. File must be manually created or contents defined on cloud hosting service.
 - `.gitignore`: Contains the files for git to ignore.
 - `app.js`: The main application file where the Express server is defined.
+- `server.js`: Initializes Express and sets up server to listen on specified port.
 - `package-lock.json`: Automatically generated file that locks dependency versions to ensure consistent installs across different environments.
 - `package.json`: The npm configuration file, which includes metadata about the project and its dependencies.
 - `README.md`: The main README file containing project information.
