@@ -50,7 +50,9 @@ app.get("/weather", async (req, res) => {
   }
 });
 
-app.listen(PORT, (err) => {
+const server = app.listen(PORT, (err) => {
   if (err) return console.error(err);
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+module.exports = server;
