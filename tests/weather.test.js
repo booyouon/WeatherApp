@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { getWeather } = require("../controllers/weather"); // Replace "./your-module" with the path to your module
+const { getWeather } = require("../controllers/weather");
 
 jest.mock("axios");
 
